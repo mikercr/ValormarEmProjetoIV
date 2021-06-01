@@ -32,30 +32,31 @@
 	import axios from "axios";
 import VueJwtDecode from "vue-jwt-decode";
 export default {
-  /*components: {
-	  SideBarComponent
-  },*/
   	data() {
     	return {
 			Operator : {},
     	};
   	},
-	async mounted() {
-		this.Operator = (await axios.getOperator(this.$router)).data
-		this.getOperator();
-	},
+	
+    
   	methods: {
-		getOperator() {
-			
-	  	},
+		  //console.log("Vou enviar os dados para: " + this.$http);
+		//console.log("Vou enviar os dados:" + this.register); 
+getOperator: function () {
+      axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
+        .then(response => {this.Operator = response.data})
+    },
 	  	deleteOperator(){
-			//await axios.deleteOperator(`this.$router/${id}`)
-			//this.getOperator();
+			await axios.deleteOperator(`this.$router/${id}`)
+			this.getOperator();
 		}
 	},
 	created() {
 		this.getOperator();
 	}
+
+    
+
 };
 </script>
 
