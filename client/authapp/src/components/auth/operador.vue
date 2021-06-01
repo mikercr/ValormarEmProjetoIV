@@ -47,8 +47,8 @@ getOperator: function () {
         .then(response => {this.Operator = response.data})
     },
 	  	deleteOperator(){
-			await axios.deleteOperator(`this.$router/${id}`)
-			this.getOperator();
+			//await axios.deleteOperator(`this.$router/${id}`)
+			//this.getOperator();
 		}
 	},
 	created() {
