@@ -45,12 +45,15 @@
       clear
     </v-btn>
   </form>
+
+
 </template>
 
 <script>
 	export default {
   data() {
     return {
+      
       register: {
 		name:"",
         ParantID: "",
