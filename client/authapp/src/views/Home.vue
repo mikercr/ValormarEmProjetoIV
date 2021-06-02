@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar />
-<br>
+    <Header />
+    <br>
     <section>
       <div class="container mt-10">
         <div class="row">
@@ -14,18 +14,18 @@
         </div>
       </div>
     </section>
+    <br>
     <Footer />
   </div>
-  
 </template>
 
 <script>
-import NavBar from "@/components/auth/header.vue";
-import Footer from "@/components/auth/footer.vue"
+import Header from "@/components/auth/header.vue";
+import Footer from "@/components/auth/footer.vue";
 import VueJwtDecode from "vue-jwt-decode";
 export default {
   components: {
-	  NavBar,
+	  Header,
     Footer
   },
   data() {
@@ -52,4 +52,3 @@ export default {
 </script>
 
 <style scoped></style>
-
