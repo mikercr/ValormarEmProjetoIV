@@ -1,9 +1,9 @@
 <template>
   <div>
     <NavBar />
-
+<br>
     <section>
-      <div class="container mt-5">
+      <div class="container mt-10">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group">
@@ -14,14 +14,19 @@
         </div>
       </div>
     </section>
+    <Footer />
   </div>
+  
 </template>
+
 <script>
-import NavBar from "@/components/auth/navBar.vue";
+import NavBar from "@/components/auth/header.vue";
+import Footer from "@/components/auth/footer.vue"
 import VueJwtDecode from "vue-jwt-decode";
 export default {
   components: {
-	  NavBar
+	  NavBar,
+    Footer
   },
   data() {
     return {

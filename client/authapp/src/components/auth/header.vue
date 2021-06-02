@@ -3,9 +3,8 @@
     <v-container>
       <v-row>
       <v-col cols="4">
-        <v-img class="ml-16" src="../assets/logo.png" max-height="64px" max-width="64px" v-if="navViewMobile && !showNavMobile"  ></v-img>
+        
       </v-col>
-      <v-spacer></v-spacer>
       <v-col cols="4">
         <v-btn class="bg_head ml-2 mt-2" v-if="navViewMobile && !showNavMobile" v-on:click="showNavMobile = true" elevation="4">
           <v-icon class="bar_icon ">fas fa-bars</v-icon>
@@ -14,29 +13,28 @@
     </v-row>
     </v-container>
     <v-app-bar class="bg_head transaction pr-16" elevation="4" v-if="!navViewMobile" >
-      <v-img class="ml-16" src="../assets/logo.png" max-height="64px" max-width="64px" ></v-img>
-      <v-spacer></v-spacer>
-      <v-btn to="/" :class="arrNumberMenu[0] + ' transaction  font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
+    
+        
+      <v-btn to="/" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
         Home
       </v-btn>
-      <v-btn to="/eventos" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
-        Eventos
+      <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
+        Utilizadores
       </v-btn>
-      <v-btn to="/equipa" :class="arrNumberMenu[2] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
-        Equipa
+      <v-btn to="/operador" :class="arrNumberMenu[2] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
+        Operador
       </v-btn>
-      <v-btn href="#Departamentos" :class="arrNumberMenu[3]  + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
-        Departamentos
+      <v-btn href="/Evento" :class="arrNumberMenu[3]  + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
+        Evento
       </v-btn>
-      <v-btn to="/historia" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
-        Historia
+      <v-btn to="/Produtos" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+        Produtos
       </v-btn>
-      <v-btn href="#SobreNos" :class="arrNumberMenu[5] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(5)">
-        Sobre nos
+          <v-spacer></v-spacer>
+      <v-btn to="/" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" @click="logUserOut">
+        Logout
       </v-btn>
-      <v-btn to="/contactos" :class="arrNumberMenu[6] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(6)">
-        Contactos
-      </v-btn>
+     
     </v-app-bar>
     <v-card :class="'bg_head ' +  classBg + ' transaction mt-0 pt-0'" style="width:100%" elevation="6" v-if="showNavMobile" >
       <v-row >
@@ -44,24 +42,20 @@
           <v-btn to="/" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
           Home
         </v-btn>
-        <v-btn to="/eventos" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
-          Eventos
+        <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
+          Utilizadores
         </v-btn>
-        <v-btn to="/equipa" :class="arrNumberMenu[2] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
-          Equipa
+        <v-btn to="/Evento" :class="arrNumberMenu[2] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
+          Evento
         </v-btn>
-        <v-btn href="#Departamentos" :class="arrNumberMenu[3]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
-          Departamentos
+        <v-btn href="/Produtos" :class="arrNumberMenu[3]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
+          Produtos
         </v-btn>
-        <v-btn to="/historia" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
-          Historia
-        </v-btn>
-        <v-btn href="#SobreNos" :class="arrNumberMenu[5] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(5)">
-          Sobre nos
-        </v-btn>
-        <v-btn to="/contactos" :class="arrNumberMenu[6] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(6)">
-          Contactos
-        </v-btn>
+
+
+        <v-btn  href="/" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" @click="logUserOut">
+          LogOut
+          </v-btn >
         </v-col>
       </v-row>
     </v-card>
@@ -71,6 +65,7 @@
   export default {
     name: 'head',
     data: () => ({
+      	user: {},
       navViewMobile: false,
       elevation: 0,
       classBg: '',
@@ -79,6 +74,10 @@
       showNavMobile: false
     }),
     methods: {
+      logUserOut() {
+				localStorage.removeItem("jwt");
+				this.$router.push("/");
+    		},
       updateScroll() {
        this.scrollPosition = window.scrollY;
        this.changeClassBg();
@@ -138,7 +137,7 @@
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  z-index: 40 !important;
+  z-index: 10 !important;
 }
 
 .tranparent {
@@ -152,7 +151,7 @@
 }
 
 .active {
-  border-bottom: 3px solid #FFC000 !important;
+  border-bottom: 3px solid #37438b !important;
 }
 
 .transaction {
