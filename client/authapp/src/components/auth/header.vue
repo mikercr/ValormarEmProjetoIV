@@ -15,7 +15,7 @@
     <v-app-bar class="bg_head transaction pr-16" elevation="4" v-if="!navViewMobile" >
     
         
-      <v-btn to="/home" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
+      <v-btn to="/" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
         Home
       </v-btn>
       <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
@@ -31,7 +31,10 @@
         Produtos
       </v-btn>
           <v-spacer></v-spacer>
-      <v-btn to="/" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" @click="logUserOut">
+        <v-btn to="/user" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+        {{user.name}} 
+         </v-btn>
+      <v-btn to="/" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
         Logout
       </v-btn>
      
@@ -39,7 +42,7 @@
     <v-card :class="'bg_head ' +  classBg + ' transaction mt-0 pt-0'" style="width:100%" elevation="6" v-if="showNavMobile" >
       <v-row >
         <v-col cols="12" class="col-12 pa-0" elevation="6" >
-          <v-btn to="/home" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
+          <v-btn to="/" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
           Home
         </v-btn>
         <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
@@ -51,7 +54,10 @@
         <v-btn href="/Produtos" :class="arrNumberMenu[3]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
           Produtos
         </v-btn>
-
+        
+<v-btn  href="/user" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" @click="logUserOut">
+          {{user.name}} 
+          </v-btn >
 
         <v-btn  href="/" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" @click="logUserOut">
           LogOut
@@ -74,6 +80,11 @@
       showNavMobile: false
     }),
     methods: {
+      getUserDetails() {
+      let token = localStorage.getItem("jwt");
+      let decoded = VueJwtDecode.decode(token);
+      this.user = decoded;
+    },
       logUserOut() {
 				localStorage.removeItem("jwt");
 				this.$router.push("/");
@@ -122,6 +133,7 @@
     },
     created() {
       this.handleView();
+       this.getUserDetails();
     }
 
   }
@@ -146,8 +158,8 @@
 }
 
 .bg_color {
-  background-color: #ffffff !important;
-  color: #333333 !important;
+  background-color: #696969 !important;
+  color: #696969 !important;
 }
 
 .active {
