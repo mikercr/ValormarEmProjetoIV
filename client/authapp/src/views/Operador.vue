@@ -2,6 +2,7 @@
   <div>
     <Header />
     <br>
+	<br>
 		<Operador />
     <br>
     <Footer />
