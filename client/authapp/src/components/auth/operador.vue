@@ -47,7 +47,7 @@
       </v-toolbar>
     </template>
 
-    <template v-slot:item.action="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         small
         class="mr-2"
@@ -63,9 +63,7 @@
       </v-icon>
     </template>
 
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
-    </template>
+ 
   </v-data-table>
 </template>
 
@@ -78,16 +76,17 @@ import axios from 'axios'
       headers: [
         {
           text: 'Name',
-          value: 'Name',
+          value: 'operatorName',
         },
-        { text: 'Id', value: 'ID' },
-        { text: 'NIF', value: 'NIF', sortable: false },
+        { text: 'Id', value: 'OperatorId' },
+        { text: 'NIF', value: 'operatorNIF'},
+        {text: 'Actions', value: 'actions', sortable: false },
       ],
       Operator: [],
       editedIndex: -1,
       editedItem: {
         Name: '',
-        calories: 0,
+        NIF: 0,
       },
       defaultItem: {
         name: '',
@@ -109,32 +108,40 @@ import axios from 'axios'
       },
     },
     created () {
-      this.initialize()
+      this.fetchItems()
     },
 
     methods: {
-      fetchItems(item){
+      
+      fetchItems(){
       axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
-                .then(response => {this.Operator = response.data})
+                .then(response => {this.Operator = response.data
+                console.log("Vou enviar os dados:" + this.Operator) 
+                }
+              )
+                
+            
         },
 
       editItem (item) {
         this.editedIndex = this.Operator.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.editedID = this.editedItem._id
         this.name = this.editedItem.name
-        this.calories = this.editedItem.calories
+        this.NIF = this.editedItem.NIF
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.Operator.indexOf(item)
-        this.deletedItem = Object.assign({}, item)
-        console.log(this.deletedItem)
-        this.deletedID = this.deletedItem._id
-        console.log(this.deletedID)
+        const { post } = this.Operator.indexOf(item)
+        //this.deletedItem = Object.assign({}, item)
+        //consolex.log(this.deletedItem)
+        //this.deletedID = this.deletedItem._id
+        //console.log(this.deletedID)
         if (confirm("Do you really want to delete?")) {
-          axios.delete(`http://localhost:5000/dessert/${this.deletedID}`);
+          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperatorByNif",{params: {id: post.operatorNIF}})
+        .then(response => {
+            console.log(response);
+        });
           this.desserts.splice(index, 1);
         }
       },
