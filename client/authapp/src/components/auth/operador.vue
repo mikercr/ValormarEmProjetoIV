@@ -132,17 +132,18 @@ import axios from 'axios'
       },
 
       deleteItem (item) {
-        const { post } = this.Operator.indexOf(item)
+        const { Operator } = this.Operator.indexOf(item)
         //this.deletedItem = Object.assign({}, item)
         //consolex.log(this.deletedItem)
         //this.deletedID = this.deletedItem._id
         //console.log(this.deletedID)
         if (confirm("Do you really want to delete?")) {
-          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperatorByNif",{params: {id: post.operatorNIF}})
+          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",{params: {id: operador}})
+          
         .then(response => {
             console.log(response);
         });
-          this.desserts.splice(index, 1);
+        
         }
       },
 
