@@ -192,6 +192,7 @@ import axios from 'axios'
           });
         }
         this.close()
+        //location.reload();
       },
     },
   }
