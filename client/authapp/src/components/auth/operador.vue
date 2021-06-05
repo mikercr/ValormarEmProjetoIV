@@ -25,11 +25,14 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="8">
+                  <v-col cols="12" sm="6" md="12">
                     <v-text-field v-model="editedItem.Name" label="Nome"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.Id" label="Id"></v-text-field>
+                  </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.Contacto" label="Contacto"></v-text-field>
                   </v-col>
@@ -53,14 +56,14 @@
 
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon
-        small
+        medium
         class="mr-2"
         @click="editItem(item)"
       >
         mdi-pencil
       </v-icon>
       <v-icon
-        small
+        medium
         @click="deleteItem(item)"
       >
         mdi-delete
@@ -91,11 +94,13 @@ import axios from 'axios'
       editedIndex: -1,
       editedItem: {
         Name: '',
+        Id: 0,
         Contacto: 0,
         NIF: 0
       },
       defaultItem: {
         name: '',
+        Id: 0,
         Contacto: 0,
         NIF: 0
       },
@@ -145,7 +150,7 @@ import axios from 'axios'
                 console.log(response);
           });
         }
-        location.reload();
+        //location.reload();
       },
 
       close () {
@@ -155,26 +160,37 @@ import axios from 'axios'
           this.editedIndex = -1
         }, 300)
       },
-      save () { // Edit Item
+
+      save () { 
         if (this.editedIndex > -1) {
-          Object.assign(this.Operator[this.editedIndex], this.editedItem)
+          console.log("Editar Operador")
+          /*Object.assign(this.Operator[this.editedIndex], this.editedItem)
           axios.delete(`http://localhost:5000/dessert/${this.editedItem._id}`)
           axios
             .post('http://localhost:5000/dessert', {
             name: this.editedItem.name,
             calories: this.editedItem.calories
-            })
-
-          // New Item
+            })*/
         } else {
+          console.log("Criar Operador")
           this.Operator.push(this.editedItem)
 
-          axios.post('http://localhost:5000/dessert', {
-          name: this.editedItem.name,
-          calories: this.editedItem.calories
-          })
+          //console.log(this.editedItem.Name)
+          //console.log(this.editedItem.Id)
+          //console.log(this.editedItem.Contacto)
+          //console.log(this.editedItem.NIF)
+          
+          axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator",
+              {
+                operatorId: this.editedItem.Id, 
+                operatorName: this.editedItem.Name,
+                operatorContactId: this.editedItem.Contacto,
+                operatorNIF: this.editedItem.NIF
+              })
+              .then(response => {
+                console.log(response);
+          });
         }
-
         this.close()
       },
     },
