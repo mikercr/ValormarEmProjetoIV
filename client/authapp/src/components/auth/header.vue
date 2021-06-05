@@ -15,7 +15,7 @@
     <v-app-bar class="bg_head transaction pr-16" elevation="4" v-if="!navViewMobile" >
     
         
-      <v-btn to="/" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
+      <v-btn to="/home" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
         Home
       </v-btn>
       <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
@@ -42,7 +42,7 @@
     <v-card :class="'bg_head ' +  classBg + ' transaction mt-0 pt-0'" style="width:100%" elevation="6" v-if="showNavMobile" >
       <v-row >
         <v-col cols="12" class="col-12 pa-0" elevation="6" >
-          <v-btn to="/" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
+          <v-btn to="/home" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
           Home
         </v-btn>
         <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">

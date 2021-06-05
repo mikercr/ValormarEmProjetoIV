@@ -76,7 +76,7 @@ export default {
           this.$router.push("/");
           swal("Success", "Registration Was successful", "success");
         } else {
-          swal("Error", "Something Went Wrong", "Error");
+          swal("Error", "Something Went Wrong", "error");
         }
       } catch (err) {
         let error = err.response;

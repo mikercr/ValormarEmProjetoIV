@@ -2,7 +2,6 @@
   <v-data-table
     :headers="headers"
     :items="Operator"
-    sort-by="calories"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -26,8 +25,13 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="8">
                     <v-text-field v-model="editedItem.Name" label="Nome"></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.Contacto" label="Contacto"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.NIF" label="Nif"></v-text-field>
@@ -53,13 +57,13 @@
         class="mr-2"
         @click="editItem(item)"
       >
-        edit
+        mdi-pencil
       </v-icon>
       <v-icon
         small
         @click="deleteItem(item)"
       >
-        delete
+        mdi-delete
       </v-icon>
     </template>
 
@@ -79,18 +83,21 @@ import axios from 'axios'
           value: 'operatorName',
         },
         { text: 'Id', value: 'OperatorId' },
+        { text: 'Contacto', value: 'operatorContactId'},
         { text: 'NIF', value: 'operatorNIF'},
-        {text: 'Actions', value: 'actions', sortable: false },
+        { text: 'Actions', value: 'actions', sortable: false },
       ],
       Operator: [],
       editedIndex: -1,
       editedItem: {
         Name: '',
-        NIF: 0,
+        Contacto: 0,
+        NIF: 0
       },
       defaultItem: {
         name: '',
-        NIF: 0,
+        Contacto: 0,
+        NIF: 0
       },
     }),
     mounted() {
@@ -133,18 +140,15 @@ import axios from 'axios'
 
       deleteItem (item) {
         const { Operator } = this.Operator.indexOf(item)
-        //this.deletedItem = Object.assign({}, item)
-        //consolex.log(this.deletedItem)
-        //this.deletedID = this.deletedItem._id
-        //console.log(this.deletedID)
-        if (confirm("Do you really want to delete?")) {
+        console.log(item.OperatorId)
+        /*if (confirm("Do you really want to delete?")) {
           axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",{params: {id: operador}})
           
         .then(response => {
             console.log(response);
         });
         
-        }
+        }*/
       },
 
       close () {

@@ -1,9 +1,8 @@
 <template>
   <div>
     <Header />
-    <br>
-	<br>
-		<Operador />
+    <br><br>
+	<Operador />
     <br>
     <Footer />
 	</div>
@@ -20,9 +19,9 @@ export default {
 		};
 	},
 	components: {
-    Header,
+		Header,
 		Operador,
-    Footer
+		Footer
 	}
 };
 </script>

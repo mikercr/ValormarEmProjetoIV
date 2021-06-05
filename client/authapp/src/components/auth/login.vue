@@ -62,7 +62,7 @@ export default {
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {
-          swal("Success", "Login Successful", "Error");
+          swal("Success", "Login Successful", "success");
           this.$router.push("/home");
         }
       } catch (err) {

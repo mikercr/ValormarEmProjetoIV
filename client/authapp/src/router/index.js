@@ -4,7 +4,6 @@ import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 import Register from "../views/register.vue";
 import Operador from "../views/Operador.vue";
-import OperadorCriar from "../views/OperadorCriar.vue";
 
 Vue.use(VueRouter);
 
@@ -31,11 +30,6 @@ const routes = [
 		path: "/operador",
 		name: "operador",
 		component: Operador //() => import("../views/operador.vue")
-	},
-	{
-		path: "/operadorform",
-		name: "operadorform",
-		component: OperadorCriar //() => import("../views/operador.vue")
 	}
 ];
 	

@@ -25,15 +25,14 @@
     <br>
     <br>
     <br>
-   
-     <v-row>
-        <carousel/>
-      </v-row>
-    <br>
-     <br>
+    <v-row>
+      <Carousel/>
+    </v-row>
     <br>
     <br>
-        <br>
+    <br>
+    <br>
+    <br>
     <Footer />
   </div>
 </template>
@@ -41,14 +40,14 @@
 <script>
 import Header from "@/components/auth/header.vue";
 import Footer from "@/components/auth/footer.vue";
- import carousel from '@/components/auth/carousel.vue'
+import Carousel from "@/components/auth/carousel.vue";
 import VueJwtDecode from "vue-jwt-decode";
 export default {
   name :'Home',
   components: {
 	  Header,
     Footer,
-    carousel
+    Carousel
   },
   data() {
     return {
