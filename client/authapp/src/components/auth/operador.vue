@@ -121,14 +121,11 @@ import axios from 'axios'
     methods: {
       
       fetchItems(){
-      axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
+        axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
                 .then(response => {this.Operator = response.data
-                console.log("Vou enviar os dados:" + this.Operator) 
-                }
-              )
-                
-            
-        },
+                  console.log("Vou enviar os dados:" + this.Operator) 
+        })
+      },
 
       editItem (item) {
         this.editedIndex = this.Operator.indexOf(item)
@@ -141,14 +138,14 @@ import axios from 'axios'
       deleteItem (item) {
         const { Operator } = this.Operator.indexOf(item)
         console.log(item.OperatorId)
-        /*if (confirm("Do you really want to delete?")) {
-          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",{params: {id: operador}})
-          
-        .then(response => {
-            console.log(response);
-        });
-        
-        }*/
+        if (confirm("Do you really want to delete?")) {
+          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",
+              {data : {operatorId: item.OperatorId}})
+              .then(response => {
+                console.log(response);
+          });
+        }
+        location.reload();
       },
 
       close () {
