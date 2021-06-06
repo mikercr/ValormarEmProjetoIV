@@ -1,17 +1,15 @@
-
 <template>
-
 <div class="style">
-
   <v-data-table
     :headers="headers"
-    :items="Operator"
+    :items="user"
     class="elevation-1"
   >
     <template v-slot:top>
+        <br>
       <v-toolbar flat color="white">
-        
-        <v-toolbar-title>Operador</v-toolbar-title>
+        <v-toolbar-title> Utilizadores:</v-toolbar-title>
+        <br>
         <v-divider
           class="mx-4"
           inset
@@ -19,9 +17,7 @@
         ></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">Novo Operador</v-btn>
-          </template>
+     
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -31,27 +27,22 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.Name" label="Nome"></v-text-field>
+                    <v-text-field v-model="editedItem.name" label="Nome"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Id" label="Id"></v-text-field>
+                    <v-text-field v-model="editedItem.email" label="email"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Contacto" label="Contacto"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.NIF" label="Nif"></v-text-field>
-                  </v-col>
+                
                 </v-row>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
+              <v-btn color="blue darken-1" text @click="save">Guardar</v-btn>
             </v-card-actions>
 
           </v-card>
@@ -89,26 +80,21 @@ import axios from 'axios'
       headers: [
         {
           text: 'Name',
-          value: 'operatorName',
+          value: 'name',
         },
-        { text: 'Id', value: 'OperatorId' },
-        { text: 'Contacto', value: 'operatorContactId'},
-        { text: 'NIF', value: 'operatorNIF'},
+        { text: 'Id', value: '_id' },
+        { text: 'Email', value: 'email'},
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      Operator: [],
+      user: [],
       editedIndex: -1,
       editedItem: {
-        Name: '',
-        OperatorId: '',
-        operatorContactId: '',
-        operatorNIF: ''
+        name: '',
+        email: ''
       },
       defaultItem: {
-       Name: '',
-        OperatorId: '',
-        operatorContactId: '',
-        operatorNIF: ''
+         name: '',
+        email: ''
       },
     }),
     mounted() {
@@ -132,26 +118,26 @@ import axios from 'axios'
     methods: {
       
       fetchItems(){
-        axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
-                .then(response => {this.Operator = response.data
-                  console.log("Vou enviar os dados:" + this.Operator) 
+        axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/user/getUsers')
+                .then(response => {this.user = response.data
+                  console.log("Vou enviar os dados:" + this.user) 
         })
       },
 
       editItem (item) {
-        this.editedIndex = this.Operator.indexOf(item)
+        this.editedIndex = this.user.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.name = this.editedItem.Name
-        this.operatorNIF = this.editedItem.operatorNIF
+        this.name = this.editedItem.name
+        this.email = this.editedItem.email
         this.dialog = true
       },
 
       deleteItem (item) {
-        const { Operator } = this.Operator.indexOf(item)
-        console.log(item.OperatorId)
+        const { Operator } = this.user.indexOf(item)
+        console.log(item._id)
         if (confirm("Do you really want to delete?")) {
-          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",
-              {data : {operatorId: item.OperatorId}})
+          axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/user/",
+              {data : {_id: item._id}})
               .then(response => {
                 this.fetchItems();
           });

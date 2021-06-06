@@ -2,9 +2,7 @@
   <div>
     <Header />
     <br><br>
-	<div class="style">
-	<Operador />
-	</div>
+	<Users />
     <br>
     <Footer />
 	</div>
@@ -12,17 +10,15 @@
 
 <script>
 import Header from "@/components/auth/header.vue";
-import Operador from "@/components/auth/operador.vue";
+import Users from "@/components/auth/users.vue";
 import Footer from "@/components/auth/footer.vue";
 export default {
 	components: {
 		Header,
-		Operador,
+		Users,
 		Footer
 	}
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

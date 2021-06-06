@@ -18,7 +18,7 @@
       <v-btn to="/home" :class="arrNumberMenu[0] + ' transaction  font-weight-left'" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
         Home
       </v-btn>
-      <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
+      <v-btn to="/users" :class="arrNumberMenu[1] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
         Utilizadores
       </v-btn>
       <v-btn to="/operador" :class="arrNumberMenu[2] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
@@ -45,7 +45,7 @@
           <v-btn to="/home" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
           Home
         </v-btn>
-        <v-btn to="/Utilizadores" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
+        <v-btn to="/users" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
           Utilizadores
         </v-btn>
         <v-btn to="/Evento" :class="arrNumberMenu[2] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(2)">

@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 import Register from "../views/register.vue";
 import Operador from "../views/Operador.vue";
+import Users from "../views/Users.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
 		path: "/operador",
 		name: "operador",
 		component: Operador //() => import("../views/operador.vue")
+	},
+  {
+		path: "/users",
+		name: "users",
+		component: Users //() => import("../views/Users.vue")
 	}
 ];
 	

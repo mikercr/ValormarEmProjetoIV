@@ -1,12 +1,14 @@
-<template>
+<template> 
+<div class="fixarRodape">
   <v-footer  elevation="4" color="#383A3C">
       <v-col class="text-center white--text" cols="12" >
-        {{ new Date().getFullYear() }} — <strong>Valomar</strong>
+        {{ new Date().getFullYear() }} — <strong>Valormar</strong>
       </v-col>  
       <v-col class="text-center" cols="12" >
       
       </v-col>
   </v-footer>
+  </div>
 </template>
 <script>
   export default {
@@ -22,7 +24,7 @@
 .fixarRodape {
         bottom: 0;
         position: fixed;
-        width: 90%;
+        width: 100%;
         text-align: center;
     }
 </style>
