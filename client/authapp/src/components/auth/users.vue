@@ -76,6 +76,7 @@
 
  
   </v-data-table>
+  <br><br><br>
 </div>
 </template>
 

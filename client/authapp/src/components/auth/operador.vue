@@ -41,18 +41,18 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.Name" label="Nome"></v-text-field>
+                    <v-text-field v-model="editedItem.operatorName" label="Name"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Id" label="Id"></v-text-field>
+                    <v-text-field v-model="editedItem.OperatorId" label="Id"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Contacto" label="Contacto"></v-text-field>
+                    <v-text-field v-model="editedItem.operatorContactId" label="Contacto"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.NIF" label="Nif"></v-text-field>
+                    <v-text-field v-model="editedItem.operatorNIF" label="Nif"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -87,6 +87,7 @@
 
  
   </v-data-table>
+  <br><br><br>
 </div>
 </template>
 
@@ -110,13 +111,13 @@ import axios from 'axios'
       Operator: [],
       editedIndex: -1,
       editedItem: {
-        Name: '',
+        operatorName: '',
         OperatorId: '',
         operatorContactId: '',
         operatorNIF: ''
       },
       defaultItem: {
-       Name: '',
+        operatorName: '',
         OperatorId: '',
         operatorContactId: '',
         operatorNIF: ''
@@ -145,15 +146,13 @@ import axios from 'axios'
       fetchItems(){
         axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
                 .then(response => {this.Operator = response.data
-                  console.log("Vou enviar os dados:" + this.Operator) 
+                  console.log("Vou enviar os dados:" + this.Operator)
         })
       },
 
       editItem (item) {
         this.editedIndex = this.Operator.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.name = this.editedItem.Name
-        this.operatorNIF = this.editedItem.operatorNIF
         this.dialog = true
       },
 
@@ -167,7 +166,6 @@ import axios from 'axios'
                 this.fetchItems();
           });
         }
-        //location.reload();
       },
 
       close () {
@@ -181,35 +179,35 @@ import axios from 'axios'
       save () { 
         if (this.editedIndex > -1) {
           console.log("Editar Operador")
-          /*Object.assign(this.Operator[this.editedIndex], this.editedItem)
-          axios.delete(`http://localhost:5000/dessert/${this.editedItem._id}`)
-          axios
-            .post('http://localhost:5000/dessert', {
-            name: this.editedItem.name,
-            calories: this.editedItem.calories
-            })*/
+          this.Operator.push(this.editedItem)
+
+          axios.put("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/updateOperator",
+              {
+                operatorId: this.editedItem.OperatorId, 
+                operatorName: this.editedItem.operatorName,
+                operatorContactId: this.editedItem.operatorContactId,
+                operatorNIF: this.editedItem.operatorNIF
+              })
+              .then(response => {
+                this.fetchItems();
+          });
+
         } else {
           console.log("Criar Operador")
           this.Operator.push(this.editedItem)
-
-          //console.log(this.editedItem.Name)
-          //console.log(this.editedItem.Id)
-          //console.log(this.editedItem.Contacto)
-          //console.log(this.editedItem.NIF)
           
           axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator",
               {
-                operatorId: this.editedItem.Id, 
-                operatorName: this.editedItem.Name,
-                operatorContactId: this.editedItem.Contacto,
-                operatorNIF: this.editedItem.NIF
+                operatorId: this.editedItem.OperatorId, 
+                operatorName: this.editedItem.operatorName,
+                operatorContactId: this.editedItem.operatorContactId,
+                operatorNIF: this.editedItem.operatorNIF
               })
               .then(response => {
                 this.fetchItems();
           });
         }
         this.close()
-        //location.reload();
       },
     },
   }
