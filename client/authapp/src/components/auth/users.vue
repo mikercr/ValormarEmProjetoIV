@@ -3,6 +3,7 @@
   <v-data-table
     :headers="headers"
     :items="user"
+    :search="search"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -16,6 +17,13 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
+        <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
         <v-dialog v-model="dialog" max-width="500px">
      
           <v-card>
@@ -76,6 +84,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
+        search: '',
       dialog: false,
       headers: [
         {

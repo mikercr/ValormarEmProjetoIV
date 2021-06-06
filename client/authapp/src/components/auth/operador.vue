@@ -6,12 +6,22 @@
   <v-data-table
     :headers="headers"
     :items="Operator"
+    :search="search"
     class="elevation-1"
   >
     <template v-slot:top>
+         <br>
       <v-toolbar flat color="white">
         
-        <v-toolbar-title>Operador</v-toolbar-title>
+        <v-toolbar-title>Operador: </v-toolbar-title>
+         <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
         <v-divider
           class="mx-4"
           inset
@@ -85,6 +95,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
+      search: '',
       dialog: false,
       headers: [
         {
