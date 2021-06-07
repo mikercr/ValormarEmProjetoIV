@@ -215,6 +215,6 @@ import axios from 'axios'
 <style lang="scss" scoped>
 .style{
     width: 95%;
-     margin: auto;
+    margin: auto;
 }
 </style>

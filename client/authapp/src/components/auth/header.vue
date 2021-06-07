@@ -24,10 +24,10 @@
       <v-btn to="/operador" :class="arrNumberMenu[2] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
         Operador
       </v-btn>
-      <v-btn href="/Evento" :class="arrNumberMenu[3]  + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
+      <v-btn to="/evento" :class="arrNumberMenu[3]  + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
         Evento
       </v-btn>
-      <v-btn to="/Produtos" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+      <v-btn to="/produto" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
         Produtos
       </v-btn>
           <v-spacer></v-spacer>
@@ -48,10 +48,10 @@
         <v-btn to="/users" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
           Utilizadores
         </v-btn>
-        <v-btn to="/Evento" :class="arrNumberMenu[2] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(2)">
+        <v-btn to="/evento" :class="arrNumberMenu[3] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
           Evento
         </v-btn>
-        <v-btn href="/Produtos" :class="arrNumberMenu[3]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
+        <v-btn to="/produto" :class="arrNumberMenu[4]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
           Produtos
         </v-btn>
         

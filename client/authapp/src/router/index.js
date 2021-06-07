@@ -6,6 +6,7 @@ import Register from "../views/register.vue";
 import Operador from "../views/Operador.vue";
 import Users from "../views/Users.vue";
 import Evento from "../views/Evento.vue";
+import Produto from "../views/Produto.vue";
 
 Vue.use(VueRouter);
 
@@ -37,12 +38,17 @@ const routes = [
 		path: "/users",
 		name: "users",
 		component: Users //() => import("../views/Users.vue")
-	}
-, {
-  path: "/Evento",
-  name: "Evento",
-  component: Evento //() => import("../views/Evento.vue")
-}
+	},
+  {
+    path: "/evento",
+    name: "evento",
+    component: Evento //() => import("../views/Evento.vue")
+  },
+  {
+    path: "/produto",
+    name: "produto",
+    component: Produto //() => import("../views/Produto.vue")
+  }
 ];
 	
 
