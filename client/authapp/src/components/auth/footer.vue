@@ -18,12 +18,13 @@
     methods: {
     },
   }
+   //position: fixed;
 </script>
 
 <style scoped>
 .fixarRodape {
-        bottom: 0;
-        position: fixed;
+        bottom: 1%;
+      
         width: 100%;
         text-align: center;
     }

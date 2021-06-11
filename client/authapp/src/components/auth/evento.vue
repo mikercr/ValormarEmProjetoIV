@@ -1,5 +1,5 @@
 <template>
-<id class="style">
+<div class="style">
   <v-stepper v-model="e1">
     <v-stepper-header>
       <v-stepper-step
@@ -117,7 +117,7 @@
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
-  </id>
+  </div>
 </template>
 
 <script>
@@ -131,7 +131,7 @@
 </script>
 <style lang="scss" scoped>
 .style{
-    width: 80%;
+    width: 95%;
      margin: auto;
 }
 </style>

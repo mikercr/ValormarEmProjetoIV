@@ -4,8 +4,10 @@
     <br><br>
 	<Users />
     <br>
+
     <Footer />
 	</div>
+
 </template>
 
 <script>
@@ -21,4 +23,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

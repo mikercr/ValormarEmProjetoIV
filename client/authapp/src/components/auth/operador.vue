@@ -7,7 +7,12 @@
     :headers="headers"
     :items="Operator"
     :search="search"
-    class="elevation-1"
+    item-key="name"
+      class="elevation-1"
+          :items-per-page="5"
+          :expanded.sync="expanded"
+          show-expand
+        single-expand
   >
     <template v-slot:top>
          <br>
@@ -22,6 +27,7 @@
         single-line
         hide-details
       ></v-text-field>
+      
         <v-divider
           class="mx-4"
           inset
@@ -68,6 +74,9 @@
         </v-dialog>
       </v-toolbar>
     </template>
+      <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">More info about {{ item.operatorContactId }}</td>
+          </template>
 
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon
@@ -96,6 +105,8 @@ import axios from 'axios'
 
   export default {
     data: () => ({
+      expanded: [],
+      singleExpand: true,
       search: '',
       dialog: false,
       headers: [
@@ -106,6 +117,7 @@ import axios from 'axios'
         { text: 'Id', value: 'OperatorId' },
         { text: 'Contacto', value: 'operatorContactId'},
         { text: 'NIF', value: 'operatorNIF'},
+        { text: '', value: 'data-table-expand' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       Operator: [],
@@ -142,6 +154,8 @@ import axios from 'axios'
     },
 
     methods: {
+      
+         
       
       fetchItems(){
         axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
