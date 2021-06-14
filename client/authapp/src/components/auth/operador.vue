@@ -6,13 +6,11 @@
   <v-data-table
     :headers="headers"
     :items="Operator"
-    :search="search"
-    item-key="name"
-      class="elevation-1"
-          :items-per-page="5"
-          :expanded.sync="expanded"
-          show-expand
-        single-expand
+    :single-expand="singleExpand"
+    :expanded.sync="expanded"
+    item-key="OperatorId"
+    show-expand
+    class="elevation-1"
   >
     <template v-slot:top>
          <br>
@@ -24,10 +22,9 @@
         v-model="search"
         append-icon="mdi-magnify"
         label="Search"
-        single-line
         hide-details
       ></v-text-field>
-      
+
         <v-divider
           class="mx-4"
           inset
@@ -35,6 +32,11 @@
         ></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
+             <v-switch
+          v-model="singleExpand"
+          label="Single expand"
+          class="mt-2"
+        ></v-switch>
           <template v-slot:activator="{ on }">
             <v-btn color="primary" dark class="mb-2" v-on="on">Novo Operador</v-btn>
           </template>
@@ -60,6 +62,7 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.operatorNIF" label="Nif"></v-text-field>
                   </v-col>
+                
                 </v-row>
               </v-container>
             </v-card-text>
@@ -74,10 +77,12 @@
         </v-dialog>
       </v-toolbar>
     </template>
-      <template v-slot:expanded-item="{ headers, item }">
-            <td :colspan="headers.length">More info about {{ item.operatorContactId }}</td>
-          </template>
-
+     <template v-slot:expanded-item="{ headers, item }">
+      <td :colspan="headers.length">
+         {{ item.operatorInfoKey}}
+      </td>
+    </template>
+ 
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         medium
@@ -105,7 +110,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
-      expanded: [],
+     expanded: [],
       singleExpand: true,
       search: '',
       dialog: false,
@@ -113,11 +118,16 @@ import axios from 'axios'
         {
           text: 'Name',
           value: 'operatorName',
+         align: 'start',
+        sortable: false,
+     
         },
         { text: 'Id', value: 'OperatorId' },
         { text: 'Contacto', value: 'operatorContactId'},
+        { text: 'Parent', value: 'operatorParentId'},
         { text: 'NIF', value: 'operatorNIF'},
-        { text: '', value: 'data-table-expand' },
+        { text: 'Localização', value: 'operatorLocation.coordinates'},
+        { text: 'Mais dados', value: 'data-table-expand' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       Operator: [],
@@ -136,7 +146,8 @@ import axios from 'axios'
       },
     }),
     mounted() {
-       this.fetchItems()
+       this.fetchItems(),
+       this.fetchItemsdet()
     },
 
     computed: {
@@ -150,7 +161,8 @@ import axios from 'axios'
       },
     },
     created () {
-      this.fetchItems()
+      this.fetchItems(),
+      this.fetchItemsdet()
     },
 
     methods: {
@@ -159,6 +171,12 @@ import axios from 'axios'
       
       fetchItems(){
         axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
+                .then(response => {this.Operator = response.data
+                  console.log("Vou enviar os dados:" + this.Operator)
+        })
+      },
+        fetchItemdet(){
+        axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/operatorInfo/getOperatorInfo')
                 .then(response => {this.Operator = response.data
                   console.log("Vou enviar os dados:" + this.Operator)
         })
