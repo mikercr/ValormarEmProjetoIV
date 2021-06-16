@@ -39,10 +39,9 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="12">
                     <v-text-field v-model="editedItem.email" label="email"></v-text-field>
                   </v-col>
-                
                 </v-row>
               </v-container>
             </v-card-text>
