@@ -7,6 +7,7 @@ import Operador from "../views/Operador.vue";
 import Users from "../views/Users.vue";
 import Evento from "../views/Evento.vue";
 import Produto from "../views/Produto.vue";
+import TipoEvento from "../views/TipoEvento.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     path: "/produto",
     name: "produto",
     component: Produto //() => import("../views/Produto.vue")
+  },
+  {
+    path: "/tipoEvento",
+    name: "tipoEvento",
+    component: TipoEvento //() => import("../views/TipoEvento.vue")
   }
 ];
 	

@@ -50,14 +50,22 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.OperatorId" label="Id"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.operatorContactId" label="Contacto"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.operatorNIF" label="Nif"></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <h6>Mais Informações: </h6>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field label="Campo"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field label="Valor"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -118,13 +126,13 @@ import axios from 'axios'
       dialog: false,
       headers: [
         {
-          text: 'Name',
-          value: 'operatorName',
+          text: 'Id', 
+          value: 'OperatorId',
           align: 'start',
           sortable: false,
      
         },
-        { text: 'Id', value: 'OperatorId' },
+        { text: 'Name', value: 'operatorName',},
         { text: 'Contacto', value: 'operatorContactId'},
         { text: 'Parent', value: 'operatorParentId'},
         { text: 'NIF', value: 'operatorNIF'},
@@ -217,7 +225,7 @@ import axios from 'axios'
 
           axios.put("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/updateOperator",
               {
-                operatorId: this.editedItem.OperatorId, 
+                operatorId: this.editedItem.OperatorId,
                 operatorName: this.editedItem.operatorName,
                 operatorContactId: this.editedItem.operatorContactId,
                 operatorNIF: this.editedItem.operatorNIF

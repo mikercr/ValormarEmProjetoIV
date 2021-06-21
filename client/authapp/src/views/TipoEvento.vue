@@ -1,28 +1,24 @@
 <template>
-  	<div>
-		<Header />
-		<br><br>
-		<div class="style">
-			<Produto />
-		</div>
-		<br>
-		<Footer />
-	</div>
+    <div>
+        <Header />
+        <br><br>
+        <TipoEvento />
+        <br>
+        <Footer />
+    </div>
 </template>
 
 <script>
 import Header from "@/components/auth/header.vue";
-import Produto from "@/components/auth/produto.vue";
+import TipoEvento from "@/components/auth/tipoEvento.vue";
 import Footer from "@/components/auth/footer.vue";
 export default {
 	components: {
 		Header,
-		Produto,
+		TipoEvento,
 		Footer
 	}
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped />

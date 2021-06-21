@@ -27,6 +27,9 @@
       <v-btn to="/evento" :class="arrNumberMenu[3]  + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
         Evento
       </v-btn>
+      <v-btn to="/tipoEvento" :class="arrNumberMenu[4]  + ' transaction  font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+          Tipo Evento
+        </v-btn>
       <v-btn to="/produto" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
         Produtos
       </v-btn>
