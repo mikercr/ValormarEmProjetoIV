@@ -49,6 +49,7 @@
                     <v-text-field v-model="editedItem.operatorName" label="Name"></v-text-field>
                   </v-col>
                 </v-row>
+
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.operatorContactId" label="Contacto"></v-text-field>
@@ -57,9 +58,24 @@
                     <v-text-field v-model="editedItem.operatorNIF" label="Nif"></v-text-field>
                   </v-col>
                 </v-row>
+
                 <v-row>
-                  <h6>Mais Informações: </h6>
+                  <v-col cols="12" sm="6" md="12">
+                    <v-text-field v-model="editedItem.operatorParentId" label="Parent"></v-text-field>
+                  </v-col>
                 </v-row>
+
+                <v-row>
+                  <v-col cols="12" sm="6" md="12">
+                    <v-text-field v-model="editedItem.operatorLocation.coordinates" label="Localização"></v-text-field>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <h6>Mais Informações (Opcional): </h6>
+                  <v-icon medium class="mr-2" @click="linha()">mdi-plus</v-icon>
+                </v-row>
+
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field label="Campo"></v-text-field>
@@ -103,7 +119,7 @@
         <br>
         <h6>Mais Informações:</h6>
         <ul v-for="info in OperatorInfo" :key="info.operatorInfoId">
-          <li v-if="info.operatorIdFk == item.OperatorId">
+          <li v-if="info.operatorId == item.OperatorId">
               {{info.operatorInfoKey}}:  {{info.operatorInfoValue}}
           </li>
         </ul>
@@ -144,16 +160,24 @@ import axios from 'axios'
       OperatorInfo: [],
       editedIndex: -1,
       editedItem: {
-        operatorName: '',
         OperatorId: '',
+        operatorName: '',
         operatorContactId: '',
-        operatorNIF: ''
+        operatorParentId: '',
+        operatorNIF: '',
+        operatorLocation: {
+          coordinates: ''
+        }
       },
       defaultItem: {
-        operatorName: '',
         OperatorId: '',
+        operatorName: '',
         operatorContactId: '',
-        operatorNIF: ''
+        operatorParentId: '',
+        operatorNIF: '',
+        operatorLocation: {
+          coordinates: ''
+        }
       },
     }),
     mounted() {
@@ -225,10 +249,13 @@ import axios from 'axios'
 
           axios.put("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/updateOperator",
               {
-                operatorId: this.editedItem.OperatorId,
                 operatorName: this.editedItem.operatorName,
                 operatorContactId: this.editedItem.operatorContactId,
-                operatorNIF: this.editedItem.operatorNIF
+                operatorParentId: this.editedItem.operatorParentId,
+                operatorNIF: this.editedItem.operatorNIF,
+                operatorLocation: {
+                  coordinates: this.editedItem.operatorLocation.coordinates
+                },
               })
               .then(response => {
                 this.fetchItems();
@@ -240,10 +267,13 @@ import axios from 'axios'
           
           axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator",
               {
-                operatorId: this.editedItem.OperatorId, 
                 operatorName: this.editedItem.operatorName,
                 operatorContactId: this.editedItem.operatorContactId,
-                operatorNIF: this.editedItem.operatorNIF
+                operatorParentId: this.editedItem.operatorParentId,
+                operatorNIF: this.editedItem.operatorNIF,
+                operatorLocation: {
+                  coordinates: this.editedItem.operatorLocation.coordinates
+                },
               })
               .then(response => {
                 this.fetchItems();
