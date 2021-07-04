@@ -32,6 +32,10 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
+
+        <v-btn color="primary" dark class="mb-2" href="/criarOperador">Novo Operador</v-btn>
+
+<!--
         <v-dialog v-model="dialog" max-width="500px">
 
           <template v-slot:activator="{ on }">
@@ -73,15 +77,15 @@
 
                 <v-row>
                   <h6>Mais Informações (Opcional): </h6>
-                  <v-icon medium class="mr-2" @click="linha()">mdi-plus</v-icon>
+                  <v-icon medium class="mr-2" @click="multiplicarLinha()">mdi-plus</v-icon>
                 </v-row>
 
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field label="Campo"></v-text-field>
+                    <v-text-field v-model="editedItemInfo.operatorInfoKey" label="Campo"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field label="Valor"></v-text-field>
+                    <v-text-field v-model="editedItemInfo.operatorInfoValue" label="Valor"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -92,9 +96,9 @@
               <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
               <v-btn color="blue darken-1" text @click="save">Save</v-btn>
             </v-card-actions>
-
           </v-card>
         </v-dialog>
+-->
       </v-toolbar>
     </template>
  
@@ -136,7 +140,7 @@ import axios from 'axios'
 
   export default {
     data: () => ({
-     expanded: [],
+      expanded: [],
       singleExpand: true,
       search: '',
       dialog: false,
@@ -179,6 +183,14 @@ import axios from 'axios'
           coordinates: ''
         }
       },
+      editedItemInfo: {
+        operatorInfoKey: '',
+        operatorInfoValue: ''
+      },
+      defaultItemInfo: {
+        operatorInfoKey: '',
+        operatorInfoValue: ''
+      },
     }),
     mounted() {
       this.fetchItems(),
@@ -219,6 +231,15 @@ import axios from 'axios'
       editItem (item) {
         this.editedIndex = this.Operator.indexOf(item)
         this.editedItem = Object.assign({}, item)
+        
+        //Get com id do item para ir buscar mais info
+        /*
+        for(info in OperatorInfo) {
+          if(info.operatorId == item.OperatorId) {
+            this.editedItemInfo = Object.assign({}, info)
+          }
+        }*/
+
         this.dialog = true
       },
 
@@ -238,6 +259,7 @@ import axios from 'axios'
         this.dialog = false
         setTimeout(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedItemInfo = Object.assign({}, this.defaultItemInfo)
           this.editedIndex = -1
         }, 300)
       },
@@ -246,6 +268,7 @@ import axios from 'axios'
         if (this.editedIndex > -1) {
           console.log("Editar Operador")
           this.Operator.push(this.editedItem)
+          this.OperatorInfo.push(this.editedItemInfo)
 
           axios.put("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/updateOperator",
               {
@@ -255,7 +278,7 @@ import axios from 'axios'
                 operatorNIF: this.editedItem.operatorNIF,
                 operatorLocation: {
                   coordinates: this.editedItem.operatorLocation.coordinates
-                },
+                }
               })
               .then(response => {
                 this.fetchItems();
@@ -264,6 +287,7 @@ import axios from 'axios'
         } else {
           console.log("Criar Operador")
           this.Operator.push(this.editedItem)
+          this.OperatorInfo.push(this.editedItemInfo)
           
           axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator",
               {
@@ -274,6 +298,10 @@ import axios from 'axios'
                 operatorLocation: {
                   coordinates: this.editedItem.operatorLocation.coordinates
                 },
+                operatorInfo: [{
+                  operatorInfoKey: this.editedItemInfo.operatorInfoKey,
+                  operatorInfoValue: this.editedItemInfo.operatorInfoValue
+                }]
               })
               .then(response => {
                 this.fetchItems();
