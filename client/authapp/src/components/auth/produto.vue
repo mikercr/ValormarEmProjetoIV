@@ -9,7 +9,7 @@
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
-                    label="Search"
+                    label="Procurar"
                     single-line
                     hide-details
                 ></v-text-field>
@@ -45,8 +45,8 @@
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                            <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                            <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
+                            <v-btn color="blue darken-1" text @click="save">Guardar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -105,7 +105,7 @@ import axios from 'axios'
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'Novo Produto' : 'Editar Produto'
       },
     },
     watch: {
@@ -134,7 +134,6 @@ import axios from 'axios'
 
       deleteItem (item) {
         const { Produto } = this.Produto.indexOf(item)
-        console.log(item.productId)
         if (confirm("Do you really want to delete?")) {
           axios.delete("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Product/deleteProductById",
               {data : {productId: item.productId}})

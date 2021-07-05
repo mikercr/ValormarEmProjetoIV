@@ -29,6 +29,7 @@ import Header from "@/components/auth/header.vue";
 import Footer from "@/components/auth/footer.vue";
 import Carousel from "@/components/auth/carousel.vue";
 import VueJwtDecode from "vue-jwt-decode";
+//https://projeto4valormar-iarkc.run-eu-central1.goorm.io/user/me
 export default {
   name :'Home',
   components: {

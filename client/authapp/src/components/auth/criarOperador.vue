@@ -20,7 +20,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12" sm="3" md="6">
-                        <v-select :items="items" label="Sucursal" v-model="sucursalOperador"></v-select>
+                        <v-select :items="Operator" label="Sucursal" v-model="sucursalOperador"></v-select>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -69,16 +69,33 @@ import axios from 'axios'
 export default {
     data: () => ({
         rows: [{campo: "", valor: ""}],
-        items: [],
+        Operator: [],
         nomeOperador: "",
         nifOperador: "",
         contactoOperador: "",
         localizacao: [""],
         sucursalOperador: ""
     }),
+    mounted() {
+        this.fetchItems()
+    },
+    created () {
+        fetchItems()
+    },
     methods: {
+        fetchItems() {
+            axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperator')
+                .then(response => {this.Operator = response.data
+                    console.log("Vou enviar os dados:" + this.Operator)
+            })
+        },
         addItem() {
-            this.rows.push({campo:"", valor:""});
+            if(this.rows.length < 3) {
+                this.rows.push({campo:"", valor:""});
+            }
+            else {
+                alert("Apenas permitido 3 informações adicionais")
+            }
         },
         deleteItem(row) {
             //alert(row);
@@ -89,9 +106,6 @@ export default {
             window.history.back();
         },
         save() {
-            //console.log(this.rows[0].campo + this.rows[0].valor)
-            //console.log(this.rows.length)
-
             axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator", {
                 operatorName: this.nomeOperador,
                 operatorContactId: this.contactoOperador,
@@ -100,10 +114,20 @@ export default {
                 operatorLocation: {
                     coordinates: this.localizacao
                 },
-                operatorInfo: [{
-                    operatorInfoKey: this.rows[0].campo,
-                    operatorInfoValue: this.rows[0].valor
-                }]
+                operatorInfo: [
+                    {
+                        operatorInfoKey: this.rows[0].campo,
+                        operatorInfoValue: this.rows[0].valor
+                    },
+                    {
+                        operatorInfoKey: this.rows[1].campo,
+                        operatorInfoValue: this.rows[1].valor
+                    },
+                    {
+                        operatorInfoKey: this.rows[2].campo,
+                        operatorInfoValue: this.rows[2].valor
+                    },
+                ]
             }).then(response => {
                 console.log("Novo Operador foi criado!!");
                 window.history.back();
