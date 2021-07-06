@@ -20,7 +20,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12" sm="3" md="6">
-                        <v-select :items="Operator" label="Sucursal" v-model="sucursalOperador"></v-select>
+                        <v-select :items="Operator" :item-text="Operator=>Operator.OperatorId + ' - ' + Operator.operatorName" item-value="OperatorId" label="Sucursal" v-model="sucursalOperador"></v-select>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -38,7 +38,7 @@
                 <div class="style">
                     <table id="table" class="table">
                         <tbody>
-                            <tr v-for="row in rows" :key="row">
+                            <tr v-for="(row, index) in rows" :key="row.id">
                                 <td>
                                     <v-text-field label="Campo" v-model="row.campo"></v-text-field>
                                 </td>
@@ -46,7 +46,7 @@
                                     <v-text-field label="Valor" v-model="row.valor"></v-text-field>
                                 </td>
                                 <td>
-                                    <v-icon @click="deleteItem(row)">mdi-delete</v-icon>
+                                    <v-icon @click="deleteItem(index)">mdi-delete</v-icon>
                                 </td>
                             </tr>
                         </tbody>
@@ -97,10 +97,9 @@ export default {
                 alert("Apenas permitido 3 informações adicionais")
             }
         },
-        deleteItem(row) {
-            //alert(row);
-            //this.rows.$remove(row);
-            //document.getElementById("table").deleteRow(row);
+        deleteItem(index) {
+            alert(index);
+            this.rows.splice(index,1);
         },
         close() {
             window.history.back();
@@ -114,23 +113,10 @@ export default {
                 operatorLocation: {
                     coordinates: this.localizacao
                 },
-                operatorInfo: [
-                    {
-                        operatorInfoKey: this.rows[0].campo,
-                        operatorInfoValue: this.rows[0].valor
-                    },
-                    {
-                        operatorInfoKey: this.rows[1].campo,
-                        operatorInfoValue: this.rows[1].valor
-                    },
-                    {
-                        operatorInfoKey: this.rows[2].campo,
-                        operatorInfoValue: this.rows[2].valor
-                    },
-                ]
+                operatorInfo: this.rows
             }).then(response => {
-                console.log("Novo Operador foi criado!!");
-                window.history.back();
+                console.log("Novo Operador foi criado!!")
+                this.$router.push("/operador")
             });
         }
     }
