@@ -17,12 +17,12 @@
          <br>
       <v-toolbar flat color="white">
         
-        <v-toolbar-title>Operador: </v-toolbar-title>
-         <v-spacer></v-spacer>
+        <v-toolbar-title>Operadores: </v-toolbar-title>
+        <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Procurar"
         hide-details
       ></v-text-field>
 
@@ -231,15 +231,6 @@ import axios from 'axios'
       editItem (item) {
         this.editedIndex = this.Operator.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        
-        //Get com id do item para ir buscar mais info
-        /*
-        for(info in OperatorInfo) {
-          if(info.operatorId == item.OperatorId) {
-            this.editedItemInfo = Object.assign({}, info)
-          }
-        }*/
-
         this.dialog = true
       },
 

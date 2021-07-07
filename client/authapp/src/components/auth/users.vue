@@ -20,10 +20,11 @@
         <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Procurar"
         single-line
         hide-details
       ></v-text-field>
+      <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
      
           <v-card>
@@ -56,23 +57,6 @@
         </v-dialog>
       </v-toolbar>
     </template>
-
-    <template v-slot:[`item.actions`]="{ item }">
-      <v-icon
-        medium
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        mdi-pencil
-      </v-icon>
-      <v-icon
-        medium
-        @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
-    </template>
-
  
   </v-data-table>
   <br><br><br>
@@ -93,7 +77,6 @@ import axios from 'axios'
         },
         { text: 'Id', value: '_id' },
         { text: 'Email', value: 'email'},
-        { text: 'Actions', value: 'actions', sortable: false },
       ],
       user: [],
       editedIndex: -1,

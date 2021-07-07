@@ -1,137 +1,84 @@
 <template>
-<div class="style">
-  <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
-      >
-        Identificação do evento
-      </v-stepper-step>
+  <div class="style">
+    <v-data-table :headers="headers" :items="Evento" :search="search" class="elevation-1">
+        <template v-slot:top>
+            <br>
+            <v-toolbar flat color="white">
+                <v-toolbar-title>Eventos: </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Procurar"
+                    single-line
+                    hide-details
+                ></v-text-field>
+                <v-divider
+                    class="mx-4"
+                    inset
+                    vertical
+                ></v-divider>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" dark class="mb-2" href="/criarEvento">Novo Evento</v-btn>
+            </v-toolbar>
+        </template>
 
-      <v-divider></v-divider>
-
-      <v-stepper-step
-        :complete="e1 > 2"
-        step="2"
-      >
-        Identificação do Operador
-      </v-stepper-step>
-
-      <v-divider></v-divider>
-
-      <v-stepper-step step="3">
-        Identificação do produto de entrada
-      </v-stepper-step>
-    </v-stepper-header>
-
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          
-          height="400px">
- <v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-  >
-    <v-text-field
-      v-model="name"
-      :counter="10"
-      :rules="nameRules"
-      label="Nome do Evento"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="Tipo evento"
-      required
-    ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[v => !!v || 'Item is required']"
-      label="Operador"
-      required
-    ></v-select>
-
-  
-  </v-form>
-
-        </v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="2">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="200px"
-
-          
-        ></v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 3"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="3">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="200px"
-        ></v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 1"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
+        <template v-slot:[`item.actions`]="{ item }">
+            <v-icon medium class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+            <v-icon medium class="mr-2" @click="deleteItem(item)">mdi-delete</v-icon>
+            <v-icon medium class="mr-2" @click="infoItem(item)">mdi-arrow-down</v-icon>
+        </template>
+    </v-data-table>
+    <br><br><br>
   </div>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        e1: 1,
-      }
+import axios from 'axios'
+export default {
+  data: () => ({
+    search: '',
+    headers: [
+      { text: 'Id', value: 'eventId' },
+      { text: 'Utilizador', value: 'userId'},
+      { text: 'Operador de Origem', value: 'operatorOriginId'},
+      { text: 'Operador de Destino', value: 'operatorDestinyId'},
+      { text: 'Tipo de Evento', value: 'eventTypeId'},
+      { text: 'Localização do Evento', value: ''},
+      { text: 'Data de Inicio', value: 'startTimeStamp'},
+      { text: 'Data de Fim', value: 'endTimeStamp'},
+      { text: 'Ações', value: 'actions', sortable: false },
+    ],
+    Evento: [],
+    editedIndex: -1,
+    editedItem: {
+      eventId: 0,
     },
+    defaultItem: {
+      eventId: 0,
+    },
+  }),
+  mounted() {
+    this.fetchItems()
+  },
+  created () {
+    this.fetchItems()
+  },
+  methods: {
+    //Get Eventos
+    fetchItems(){
+      axios.get('http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Event/getEvent')
+        .then(response => {this.Evento = response.data
+          console.log("Vou enviar os dados:" + this.Evento)
+      })
+    }
   }
+}
 </script>
+
 <style lang="scss" scoped>
-.style{
+.style {
     width: 95%;
-     margin: auto;
+    margin: auto;
 }
 </style>

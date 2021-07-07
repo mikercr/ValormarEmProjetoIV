@@ -4,7 +4,7 @@
         <template v-slot:top>
             <br>
             <v-toolbar flat color="white">
-                <v-toolbar-title>Produto: </v-toolbar-title>
+                <v-toolbar-title>Produtos: </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"

@@ -30,51 +30,26 @@
       <v-btn to="/tipoEvento" :class="arrNumberMenu[4]  + ' transaction  font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
           Tipo Evento
         </v-btn>
-      <v-btn to="/produto" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+      <v-btn to="/produto" :class="arrNumberMenu[5] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(5)">
         Produtos
       </v-btn>
           <v-spacer></v-spacer>
-        <v-btn to="/user" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
-        {{user.name}} 
-         </v-btn>
-      <v-btn to="/" :class="arrNumberMenu[4] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
+      <v-btn @click="showUser()" :class="arrNumberMenu[6] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(6)">
+        <v-icon medium class="mr-2">mdi-account</v-icon>
+      </v-btn>
+      <v-btn to="/" :class="arrNumberMenu[7] + ' transaction font-weight-medium'" elevation="0" x-large tile v-on:click="changeMenuActive(7)">
         Logout
       </v-btn>
-     
     </v-app-bar>
-    <v-card :class="'bg_head ' +  classBg + ' transaction mt-0 pt-0'" style="width:100%" elevation="6" v-if="showNavMobile" >
-      <v-row >
-        <v-col cols="12" class="col-12 pa-0" elevation="6" >
-          <v-btn to="/home" :class="arrNumberMenu[0] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(0)">
-          Home
-        </v-btn>
-        <v-btn to="/users" :class="arrNumberMenu[1] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(1)">
-          Utilizadores
-        </v-btn>
-        <v-btn to="/evento" :class="arrNumberMenu[3] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(3)">
-          Evento
-        </v-btn>
-        <v-btn to="/produto" :class="arrNumberMenu[4]  + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" x-large tile v-on:click="changeMenuActive(4)">
-          Produtos
-        </v-btn>
-        
-<v-btn  href="/user" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" @click="logUserOut">
-          {{user.name}} 
-          </v-btn >
-
-        <v-btn  href="/" :class="arrNumberMenu[4] + ' bg_color transaction  font-weight-medium'" style="width: 100%" elevation="0" @click="logUserOut">
-          LogOut
-          </v-btn >
-        </v-col>
-      </v-row>
-    </v-card>
   </v-main>
 </template>
 <script>
+import axios from 'axios'
+import swal from "sweetalert";
   export default {
     name: 'head',
     data: () => ({
-      	user: {},
+      user: {},
       navViewMobile: false,
       elevation: 0,
       classBg: '',
@@ -87,11 +62,11 @@
       let token = localStorage.getItem("jwt");
       let decoded = VueJwtDecode.decode(token);
       this.user = decoded;
-    },
+      },
       logUserOut() {
 				localStorage.removeItem("jwt");
 				this.$router.push("/");
-    		},
+    	},
       updateScroll() {
        this.scrollPosition = window.scrollY;
        this.changeClassBg();
@@ -126,6 +101,9 @@
           }
         }
          this.showNavMobile = false;
+      },
+      showUser() {
+        swal("Utilizador", "" + this.user.email, "info")
       }
     },
     mounted() {
