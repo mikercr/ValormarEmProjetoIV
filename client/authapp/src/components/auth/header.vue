@@ -44,7 +44,6 @@
   </v-main>
 </template>
 <script>
-import axios from 'axios'
 import swal from "sweetalert";
   export default {
     name: 'head',
@@ -103,7 +102,7 @@ import swal from "sweetalert";
          this.showNavMobile = false;
       },
       showUser() {
-        swal("Utilizador", "" + this.user.email, "info")
+        swal("Utilizador", "" + this.user.name, "info")
       }
     },
     mounted() {
@@ -113,8 +112,8 @@ import swal from "sweetalert";
     computed: {
     },
     created() {
-      this.handleView();
-       this.getUserDetails();
+      this.handleView(),
+      this.getUserDetails();
     }
 
   }

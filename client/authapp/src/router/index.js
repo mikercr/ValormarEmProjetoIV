@@ -10,6 +10,7 @@ import Produto from "../views/Produto.vue";
 import TipoEvento from "../views/TipoEvento.vue";
 import CriarOperador from "../views/CriarOperador.vue";
 import CriarEvento from "../views/CriarEvento.vue";
+import EditarOperador from "../views/EditarOperador.vue";
 
 Vue.use(VueRouter);
 
@@ -66,6 +67,11 @@ const routes = [
     path: "/criarEvento",
     name: "criarEvento",
     component: CriarEvento //() => import("../views/CriarEvento.vue")
+  },
+  {
+    path: "/editarOperador",
+    name: "editarOperador",
+    component: EditarOperador //() => import("../views/EditarOperador.vue")
   }
 ];
 	

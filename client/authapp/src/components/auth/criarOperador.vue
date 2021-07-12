@@ -90,12 +90,7 @@ export default {
             })
         },
         addItem() {
-            if(this.rows.length < 3) {
-                this.rows.push({campo:"", valor:""});
-            }
-            else {
-                alert("Apenas permitido 3 informações adicionais")
-            }
+            this.rows.push({campo:"", valor:""});
         },
         deleteItem(index) {
             alert(index);

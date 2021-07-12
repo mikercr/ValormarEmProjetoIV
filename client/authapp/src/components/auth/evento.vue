@@ -2,7 +2,7 @@
   <div class="style">
     <v-data-table :headers="headers" :items="Evento" :search="search" class="elevation-1">
         <template v-slot:top>
-            <br>
+          <br>
             <v-toolbar flat color="white">
                 <v-toolbar-title>Eventos: </v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -71,6 +71,17 @@ export default {
         .then(response => {this.Evento = response.data
           console.log("Vou enviar os dados:" + this.Evento)
       })
+    },
+    //Delete Evento
+    deleteItem (item) {
+      const { Evento } = this.Evento.indexOf(item)
+      if (confirm("Do you really want to delete?")) {
+        axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/event/deleteEvent",
+          {data : {eventId: item.eventId}})
+          .then(response => {
+            this.fetchItems();
+        });
+      }
     }
   }
 }

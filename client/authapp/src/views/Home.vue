@@ -4,22 +4,14 @@
     <br>
     <br>
     <v-spacer></v-spacer>  
-        <v-col >
-          <v-divider color="Gray"></v-divider>
-          <h2 class="mt-2 text-h4 font-weight-bold" align="center" justify="center">Bem Vindo ao Backoffice ValorMar, {{user.name}}</h2>
-        </v-col>
-<v-divider color="Gray"></v-divider>
-  
+    <v-col >
+      <v-divider color="Gray"></v-divider>
+      <h2 class="mt-2 text-h4 font-weight-bold" align="center" justify="center">Bem Vindo ao Backoffice ValorMar, {{user.name}}</h2>
+    </v-col>
+    <v-divider color="Gray"></v-divider>
     <br>
-
-    <v-row>
-      <Carousel/>
-    </v-row>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <v-row><Carousel/></v-row>
+    <br><br><br><br><br>
     <Footer />
   </div>
 </template>
