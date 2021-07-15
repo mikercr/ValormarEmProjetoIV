@@ -78,7 +78,7 @@ import axios from 'axios'
       },
     }),
     mounted() {
-       this.fetchItems()
+      this.fetchItems()
     },
     created () {
       this.fetchItems()
@@ -146,7 +146,7 @@ import axios from 'axios'
       //Remover o Tipo de Evento selecionado ---------------------------------------------------------------
       deleteItem (item) {
         const { TipoEvento } = this.TipoEvento.indexOf(item)
-        if (confirm("Do you really want to delete?")) {
+        if (confirm("Tem a certeza que pretende remover?")) {
           axios.delete("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/eventType/deleteEventType",
               {data : {eventTypeId: item.eventTypeId}})
               .then(response => {

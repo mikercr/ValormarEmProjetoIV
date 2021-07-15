@@ -26,7 +26,6 @@
         <template v-slot:[`item.actions`]="{ item }">
             <v-icon medium class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
             <v-icon medium class="mr-2" @click="deleteItem(item)">mdi-delete</v-icon>
-            <v-icon medium class="mr-2" @click="infoItem(item)">mdi-arrow-down</v-icon>
         </template>
     </v-data-table>
     <br><br><br>
@@ -44,7 +43,7 @@ export default {
       { text: 'Operador de Origem', value: 'operatorOriginId'},
       { text: 'Operador de Destino', value: 'operatorDestinyId'},
       { text: 'Tipo de Evento', value: 'eventTypeId'},
-      { text: 'Localização do Evento', value: ''},
+      { text: 'Localização do Evento', value: 'eventLocation.coordinates'},
       { text: 'Data de Inicio', value: 'startTimeStamp'},
       { text: 'Data de Fim', value: 'endTimeStamp'},
       { text: 'Ações', value: 'actions', sortable: false },

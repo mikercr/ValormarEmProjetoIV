@@ -73,7 +73,7 @@ export default {
         nomeOperador: "",
         nifOperador: "",
         contactoOperador: "",
-        localizacao: [""],
+        localizacao: [],
         sucursalOperador: ""
     }),
     mounted() {
@@ -93,8 +93,9 @@ export default {
             this.rows.push({campo:"", valor:""});
         },
         deleteItem(index) {
-            alert(index);
-            this.rows.splice(index,1);
+            if (confirm("Tem a certeza que pretende remover?")) {
+                this.rows.splice(index,1);
+            } 
         },
         close() {
             window.history.back();

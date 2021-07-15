@@ -107,7 +107,7 @@ export default {
             window.history.back();
         },
         save() {
-            axios.post("", {
+            axios.post("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/updateOperator", {
                 operatorName: this.nomeOperador,
                 operatorContactId: this.contactoOperador,
                 operatorParentId: this.sucursalOperador,

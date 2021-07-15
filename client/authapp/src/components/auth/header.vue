@@ -45,6 +45,8 @@
 </template>
 <script>
 import swal from "sweetalert";
+import VueJwtDecode from "vue-jwt-decode";
+
   export default {
     name: 'head',
     data: () => ({
@@ -102,7 +104,7 @@ import swal from "sweetalert";
          this.showNavMobile = false;
       },
       showUser() {
-        swal("Utilizador", "" + this.user.name, "info")
+        swal("Utilizador", "Nome: " + this.user.name + "\n" + "Email: " + this.user.email, "info")
       }
     },
     mounted() {

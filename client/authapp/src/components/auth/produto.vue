@@ -87,6 +87,7 @@ import axios from 'axios'
         { text: 'Ações', value: 'actions', sortable: false },
       ],
       Produto: [],
+      Produtos: [],
       editedIndex: -1,
       editedItem: {
         productId: 0,
@@ -134,7 +135,7 @@ import axios from 'axios'
 
       deleteItem (item) {
         const { Produto } = this.Produto.indexOf(item)
-        if (confirm("Do you really want to delete?")) {
+        if (confirm("Tem a certeza que pretende remover?")) {
           axios.delete("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Product/deleteProductById",
               {data : {productId: item.productId}})
               .then(response => {

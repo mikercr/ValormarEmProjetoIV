@@ -136,7 +136,7 @@ import axios from 'axios'
 
       deleteItem (item) {
         const { Operator } = this.Operator.indexOf(item)
-        if (confirm("Do you really want to delete?")) {
+        if (confirm("Tem a certeza que pretende remover?")) {
           axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",
               {data : {operatorId: item.OperatorId}})
               .then(response => {
