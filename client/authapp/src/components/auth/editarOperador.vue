@@ -28,30 +28,6 @@
                         <v-text-field label="Localização" v-model="localizacao"></v-text-field>
                     </v-col>
                 </v-row>
-                <br>
-                <p class="font-weight-bold">
-                    Mais Informações:
-                    <v-btn class="mx-2" fab dark small color="primary" @click="addItem()">
-                        <v-icon dark>mdi-plus</v-icon>
-                    </v-btn>
-                </p>
-                <div class="style">
-                    <table id="table" class="table">
-                        <tbody>
-                            <tr v-for="(row, index) in rows" :key="row.id">
-                                <td>
-                                    <v-text-field label="Campo" v-model="row.campo"></v-text-field>
-                                </td>
-                                <td>
-                                    <v-text-field label="Valor" v-model="row.valor"></v-text-field>
-                                </td>
-                                <td>
-                                    <v-icon @click="deleteItem(index)">mdi-delete</v-icon>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </v-container>
         </v-form>
 
@@ -91,17 +67,10 @@ export default {
             });
 
             axios.get("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/getOperatorById", 
-                {data: { operatorId: "133" }
+                {params: { operatorId: "133" }
             }).then(response => {this.Operator = response.data
                 console.log("Receber Operador:" + this.Operator)
             });
-        },
-        addItem() {
-            this.rows.push({campo:"", valor:""})
-        },
-        deleteItem(index) {
-            //alert(index);
-            this.rows.splice(index,1);
         },
         close() {
             window.history.back();
@@ -114,11 +83,11 @@ export default {
                 operatorNIF: this.nifOperador,
                 operatorLocation: {
                     coordinates: this.localizacao
-                },
-                operatorInfo: this.rows
+                }
             }).then(response => {
                 console.log("Operador foi Editado!!")
                 this.$router.push("/operador")
+                swal("Operador editado com Sucesso!", "", "info")
             });
         }
     }

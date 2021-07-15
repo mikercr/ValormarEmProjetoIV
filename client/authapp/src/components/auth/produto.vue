@@ -139,7 +139,8 @@ import axios from 'axios'
           axios.delete("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Product/deleteProductById",
               {data : {productId: item.productId}})
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Produto removido com Sucesso!", "", "info")
           });
         }
       },
@@ -164,7 +165,8 @@ import axios from 'axios'
                 productDescription: this.editedItem.productDescription
               })
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Produto editado com Sucesso!", "", "info")
           });
 
         } else {
@@ -178,7 +180,8 @@ import axios from 'axios'
                 productDescription: this.editedItem.productDescription
               })
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Produto criado com Sucesso!", "", "info")
           });
         }
         this.close()

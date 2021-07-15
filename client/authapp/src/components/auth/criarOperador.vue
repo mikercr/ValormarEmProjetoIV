@@ -38,7 +38,7 @@
                 <div class="style">
                     <table id="table" class="table">
                         <tbody>
-                            <tr v-for="(row, index) in rows" :key="row.id">
+                            <tr v-for="(row, index) in rows" :key="index">
                                 <td>
                                     <v-text-field label="Campo" v-model="row.campo"></v-text-field>
                                 </td>
@@ -68,7 +68,7 @@
 import axios from 'axios'
 export default {
     data: () => ({
-        rows: [{campo: "", valor: ""}],
+        rows: [],
         Operator: [],
         nomeOperador: "",
         nifOperador: "",
@@ -101,6 +101,16 @@ export default {
             window.history.back();
         },
         save() {
+            let arrayRows = []
+
+            for(let i = 0; i < this.rows.length; i++) {
+                let info = {
+                    operatorInfoKey: this.rows[i].campo,
+                    operatorInfoValue: this.rows[i].valor
+                }
+                arrayRows[i] = info;
+            }
+
             axios.post("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/newOperator", {
                 operatorName: this.nomeOperador,
                 operatorContactId: this.contactoOperador,
@@ -109,10 +119,11 @@ export default {
                 operatorLocation: {
                     coordinates: this.localizacao
                 },
-                operatorInfo: this.rows
+                operatorInfo: arrayRows
             }).then(response => {
                 console.log("Novo Operador foi criado!!")
                 this.$router.push("/operador")
+                swal("Operador criado com Sucesso!", "", "info")
             });
         }
     }

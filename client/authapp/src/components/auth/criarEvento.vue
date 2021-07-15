@@ -102,6 +102,7 @@
             <v-row>
               <v-col cols="12" sm="3" md="6">
                 <h5>Lote(s) já existe(m)? </h5>
+                <p> {{inputLots}} </p>
                 <v-switch v-model="switch1"></v-switch>
               </v-col>
             </v-row>

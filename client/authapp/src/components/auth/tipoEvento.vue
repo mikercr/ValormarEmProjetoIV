@@ -128,7 +128,8 @@ import axios from 'axios'
                 eventTypeDescription: this.editedItem.eventTypeDescription
               })
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Tipo Evento editado com Sucesso!", "", "info")
           });
         } else {
           console.log("Criar Tipo de Evento")
@@ -138,7 +139,8 @@ import axios from 'axios'
             eventTypeName: this.editedItem.eventTypeName,
             eventTypeDescription: this.editedItem.eventTypeDescription
           }).then(response => {
-            this.fetchItems();
+            this.fetchItems(),
+            swal("Tipo Evento criado com Sucesso!", "", "info")
           });
         }
         this.close()
@@ -150,7 +152,8 @@ import axios from 'axios'
           axios.delete("https://projeto4valormar-iarkc.run-eu-central1.goorm.io/eventType/deleteEventType",
               {data : {eventTypeId: item.eventTypeId}})
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Tipo Evento removido com Sucesso!", "", "info")
           });
         }
       }

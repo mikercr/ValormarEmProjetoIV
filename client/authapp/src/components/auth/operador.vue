@@ -140,7 +140,8 @@ import axios from 'axios'
           axios.delete("http://projeto4valormar-iarkc.run-eu-central1.goorm.io/Operator/deleteOperator",
               {data : {operatorId: item.OperatorId}})
               .then(response => {
-                this.fetchItems();
+                this.fetchItems(),
+                swal("Operador removido com Sucesso!", "", "info")
           });
         }
       }
