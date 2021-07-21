@@ -8,48 +8,7 @@ const EventField = require('../model/EventField');
 const Product = require('../model/Product');
 var ObjectId = require('mongodb').ObjectId;
 
-exports.newEvent = async (req, res) => {
-	console.log(req.body);
-	try {
-		const tamEvent = await Event.find().count();
-		console.log(tamEvent);
-		if (tamEvent != 0) {
-			const events = await Event.find().sort('-eventId').limit(1);
-			console.log('Parou aqui 002' + events);
-			const maxEvent = events[0].eventId;
-			console.log(maxEvent);
-
-			const event = new Event({
-				eventId: maxEvent + 1,
-				eventName: req.body.eventName, //alterar estes campos...
-				//eventUserCE: req.body.eventUserCE,
-				//eventOperatorCE: req.body.eventOperatorCE,
-				//eventOperatorDestinationCE: req.body.eventOperatorDestinationCE,
-				//eventTypeIdCE: req.bodyd.eventTypeIdCE
-			});
-			const OP = await event.save();
-
-			res.status(201).json({ OP });
-		} else {
-			const nuloEvent = 1;
-
-			const event = new Event({
-				eventId: nuloEvent,
-				eventName: req.body.eventName,
-				//acrescentar os outros campos...
-			});
-			let OP = await event.save();
-
-			res.status(201).json({ OP });
-		}
-	} catch (err) {
-		//res.status(400).json({ err: err });
-		res.send(err);
-	}
-};
-
 exports.getEvent = async (req, res) => {
-	console.log('O event chegou aqui...2');
 	try {
 		let events = await Event.find();
 		res.send(events);
@@ -59,7 +18,6 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.deleteEvent = async (req, res) => {
-	console.log('O event chegou aqui...3');
 	try {
 		const eventId = req.body.eventId;
 		const eventRemove = await Event.findOneAndDelete({ eventId: eventId });
@@ -71,13 +29,11 @@ exports.deleteEvent = async (req, res) => {
 
 exports.updateEvent = async (req, res) => {
 	try {
-		console.log(req.body.eventId);
 		const updateEvt = req.body;
 		const eventUpdate = await Event.findOneAndUpdate(
 			{ eventId: updateEvt.eventId },
 			updateEvt
 		);
-		console.log(eventUpdate);
 		const eventUpdated = await Event.findOne({ eventId: updateEvt.eventId });
 		res.send('Evento atualizado com sucesso!');
 	} catch (err) {
@@ -87,7 +43,6 @@ exports.updateEvent = async (req, res) => {
 
 exports.getEventById = async (req, res) => {
 	try {
-		console.log('Pesquisa de evento por id');
 		const eventGetById = req.body.eventId;
 		const eventGetId = await Event.findOne({ eventId: eventGetById });
 		if (!eventGetId) return res.send('O evento não existe');
@@ -96,97 +51,6 @@ exports.getEventById = async (req, res) => {
 		res.status(400).json({ err: err + ' (Erro na pesquisa por evento, pelo id)' });
 	}
 };
-
-exports.newEventTeste = async (req, res) => {
-	try {
-		const tamEvent = await Event.find().count();
-		if (tamEvent != 0) {
-			const events = await Event.find().sort('-eventId').limit(1);
-			const maxEvent = events[0].eventId;
-			const event = new Event({
-				eventId: maxEvent + 1,
-				userId: req.body.userId,
-				operatorOriginId: req.body.operatorOriginId,
-				//operatorDestinyId: req.body.operatorDestinyId,
-				operatorDestinyId: new ObjectId(req.body.operatorDestinyId),
-				eventTypeId: req.body.eventTypeId,
-				startTimeStamp: req.body.startTimeStamp,
-				endTimeStamp: req.body.endTimeStamp
-			});
-			const OP = await event.save();
-			criarOutputLot(maxEvent, res);
-			criarOutputLot(maxEvent, res);
-			
-		}
-		else{
-			const nuloEvent = 1;
-			const event = new Event({
-				eventId: nuloEvent,
-				userId: req.body.userId,
-				operatorOriginId: req.body.operatorOriginId,
-				//operatorDestinyId: req.body.operatorDestinyId,
-				operatorDestinyId: new ObjectId(req.body.operatorDestinyId),
-				eventTypeId: req.body.eventTypeId,
-				startTimeStamp: req.body.startTimeStamp,
-				endTimeStamp: req.body.endTimeStamp
-			});
-			const OP = await event.save();
-			criarOutputLot(maxEvent, res);
-			criarOutputLot(maxEvent, res);
-		}
-		
-	}
-	catch(err) {res.send(err);}
-};
-
-//Funções--------------------------------------------------------------------------
-async function criarInputLot(maxEvent, res) {
-	
-	const Event = require('../model/Event');
-	const EventInputLot = require('../model/EventInputLot');
-	
-	const infoArrayIn = req.body.inputLots;
-	const tamInLot = await EventInputLot.find().count();
-	
-	if (tamInLot != 0) {
-		const inputs = await EventInputLot.find().sort("-eventInputLotId").limit(1);
-		const maxInputs = inputs[0].eventInputLotId;
-		let incremento = 1;
-		for (i = 0; i < infoArrayIn.length; i++) {
-			const eventInputLot = new EventInputLot({
-				eventInputLotId: (maxInputs + incremento),
-				eventId: maxEvent + 1,
-				lotId: infoArrayIn[i].lotId
-			});
-			let OPI = await eventInputLot.save();
-			incremento++;
-		}
-		res.status(201).json();
-	} 
-}
-
-//---------------------------------------------
-exports.populateEvent = async (req, res) => {
-	
-	Event.findOne({eventId: 23}).populate("operators").then(user => {
-      res.json(user); 
-   	});
-	/*
-	try {
-		console.log('populacao de eventos');
-		const popEv = await Event.findOne({ eventId: 22 })
-	.populate("Operators")
-	.then((popEv) => {
-		res.json(popEv);
-	});
-	
-	} catch(err) {
-		res.status(400).json({ err: err + ' (Erro de POPULACAO)'})
-	}
-	*/
-};
-
-//-----------------------------------------------------------------
 
 exports.exportEventFinalEmTeste = async (req, res) => {
 	try {
@@ -250,7 +114,6 @@ exports.exportEventFinalEmTeste = async (req, res) => {
 
 exports.newEventFinalEmTeste = async (req, res) => {
 	try {
-		console.log(req.body.eventLocation.coordinates);
 		const verTam = req.body.eventLocation.coordinates.length;
 		const oprCoord = await Operator.find({'OperatorId': req.body.operatorOriginId}).sort('OperatorId');
 		const coor = oprCoord[0].operatorLocation.coordinates[0];
@@ -357,8 +220,12 @@ async function criarNovoLotFinalEmTeste(maxEvent, req, res) {
 	for (i = 0; i < infoArrayIn.length; i++) {
 		let getHistory = await Lot.find({ 'lotId': infoArrayIn[i].lotId }).sort('eventHistory').limit(1);
 		let eventHistoryId = getHistory[0].eventHistory;
-		console.log(eventHistoryId);
-		historico = historico + "-" + eventHistoryId + "-" + max;
+		if(eventHistoryId.length == 0) {
+			historico = max;
+		} else {
+			historico = eventHistoryId + "-" + max;
+		}
+		
 	}
 	
 	for (i = 0; i < nLot; i++) {

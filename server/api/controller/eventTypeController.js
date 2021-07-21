@@ -1,17 +1,4 @@
 const EventType = require('../model/EventType');
-/*
-const Event = require('../model/Event');
-const EventInputLot = require('../model/EventInputLot');
-const EventOutLot = require('../model/EventOutputLot');
-const EventInfo = require('../model/EventInfo');
-const Lot = require('../model/Lot');
-
-Event.collection.drop();
-EventInputLot.collection.drop();
-EventOutLot.collection.drop();
-EventInfo.collection.drop();
-Lot.collection.drop();
-*/
 
 exports.newEventTypes = async (req, res) => {
 	try {
@@ -62,7 +49,6 @@ exports.deleteEventType = async (req, res) => {
 
 exports.getEventTypeById = async (req, res) => {
 	try {
-		console.log(req.params.eventTypeId);
 		const eventTGetId = await EventType.findOne({ eventTypeId: req.params.eventTypeId });
 		if (!eventTGetId) return res.send('O tipo de evento não existe');
 		res.send(eventTGetId);
@@ -70,15 +56,14 @@ exports.getEventTypeById = async (req, res) => {
 		res.status(400).json({ err: err + ' (Erro na pesquisa por do tipo de evento por id)' });
 	}
 };
+
 exports.updateEventType = async (req, res) => {
 	try {
-		console.log(req.body.eventTypeId);
 		const updateEventT = req.body;
 		const eventTypeUpdate = await EventType.findOneAndUpdate(
 			{ eventTypeId: updateEventT.eventTypeId },
 			updateEventT
 		);
-		console.log(eventTypeUpdate);
 		const eventTypeUpdated = await EventType.findOne(
 			{ eventTypeId: updateEventT.eventTypeId }
 		);

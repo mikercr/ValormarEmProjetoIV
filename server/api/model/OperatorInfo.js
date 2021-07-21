@@ -4,20 +4,20 @@ const Schema = mongoose.Schema;
 const operatorInfoSchema = mongoose.Schema({
 	operatorInfoId: {
 		type: Number,
-		unique: true
-		//required: [true, "Please, include the number"]
+		unique: true,
+		required: true
 	},
 	operatorInfoKey: {
 		type: String,
-		//required: [true, "Please, include the Name"]
+		required: true
 	},
 	operatorInfoValue: {
 		type: String,
-		//required: [true, "Please, include your number"]
+		required: true
 	},
-	operatorId: {	//este campo identifica o id do operador ao qual pertence esta inforamacao extra
+	operatorId: {
 		type: Number,
-		//required: [true, "Please, include your number"]
+		required: true
 	}
 });
 

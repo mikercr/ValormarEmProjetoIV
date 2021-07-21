@@ -6,7 +6,6 @@ const EventType = require('../model/EventType');
 exports.newLot = async (req, res) => {
 	try {
 		const tamLot = await Lot.find().count();
-		console.log(tamLot);
 		if (tamLot != 0) {
 			const lots = await Lot.find().sort('-lotId').limit(1);
 			const maxLot = lots[0].lotId;
@@ -35,7 +34,6 @@ exports.newLot = async (req, res) => {
 exports.getLot = async (req, res) => {
 	try {
 		let lots = await Lot.find();
-		//Lot.collection.drop();
 		res.send(lots);
 	} catch (err) {
 		res.status(400).json({ err: err + ' (Erro ao pesquisar todos os lotes)' });
@@ -87,7 +85,6 @@ exports.trackLots = async (req, res) => {
 		let coords = [];
 		for(i=0;i<(array.length);i++) {
 			let eventsid = await Event.find({ 'eventId': array[i] }).sort("eventId");
-			console.log(eventsid[0].eventLocation.coordinates[0]);
 			let latlon = eventsid[0].eventLocation.coordinates[0].split(', ');
 			let eventTypeName = await EventType.find({ 'eventTypeId': eventsid[0].eventTypeId }).sort("eventTypeId");
 			coords[i] = {lat: latlon[0], //eventsid[0].eventLocation.coordinates[0],

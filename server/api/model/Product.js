@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-	// talvez a informação (sem contar com o ID venha de outro schema)
 	productId: {
 		type: Number,
 		unique: true,

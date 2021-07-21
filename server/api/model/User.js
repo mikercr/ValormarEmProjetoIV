@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
-	// acrescentar mais dados... com base no email
   name: {
     type: String,
     required: [true, "Please Include your name"]

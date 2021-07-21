@@ -53,13 +53,11 @@ exports.deleteEventField = async (req, res) => {
 
 exports.updateEventField = async (req, res) => {
 	try {
-		console.log(req.body.eventFieldId);
 		const updateEventF = req.body;
 		const eventFieldUpdate = await EventField.findOneAndUpdate(
 			{ eventFieldId: updateEventF.eventFieldId },
 			updateEventF
 		);
-		console.log(eventFieldUpdate);
 		const eventFieldUpdated = await EventField.findOne({
 			eventFieldId: updateEventF.eventFieldId,
 		});
@@ -71,7 +69,6 @@ exports.updateEventField = async (req, res) => {
 
 exports.getEventFieldById = async (req, res) => {
 	try {
-		console.log('Pesquisa de campo do evento por id');
 		const eventFieldGetById = req.body.eventFieldId;
 		const eventFGetId = await EventField.findOne({ eventFieldId: eventFieldGetById });
 		if (!eventFGetId) return res.send('Não existe esse campo evento');

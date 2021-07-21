@@ -2,27 +2,28 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const operatorSchema = new Schema({
-	//campos  manuais para jรก (para testar no postman)
 	OperatorId: {
 		type: Number,
-		unique: true
-		//required: [true, "Please, include your number"]
+		unique: true,
+		required: true
 	},
 	operatorName: {
 		type: String,
-		//required: [true, "Please, include your name 1111"]
+		required: true
 	},
 	operatorParentId: {
 		type: Number,
+		required: false
 	},
 	operatorContactId: {
 		type: Number,
+		required: true
 	},
 	operatorNIF: {
 		type: Number,
+		required: true
 	},
 	operatorLocation: {
-		//type: { type: String },
         coordinates: []
 	}
 });

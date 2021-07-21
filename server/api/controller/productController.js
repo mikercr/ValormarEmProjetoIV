@@ -58,14 +58,11 @@ exports.deleteProductById = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
 	try {
-		console.log('A atualizar produtos');
-		console.log(req.body.productId);
 		const updateProd = req.body;
 		const productUpdate = await Product.findOneAndUpdate(
 			{ productId: updateProd.productId },
 			updateProd
 		);
-		console.log(productUpdate);
 		const productUpdated = await Product.findOne({ productId: updateProd.productId });
 		res.send('Produto:\n' + productUpdated.productFishName + '\nAtualizado com sucesso!');
 	} catch (err) {
