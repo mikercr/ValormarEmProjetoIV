@@ -1,10 +1,11 @@
 ## Valormar - IPVC Project IV
 #### Project made by students of Informatics Engineering
 ##### Curricular Unit: Project IV
-###### Swagger.io documentation: [Swagger.io](https://app.swaggerhub.com/apis-docs/projeto4_2021/ValormarIPVC/1.0.0)
 ##### Work made by:
 	- Ricardo Morais, nº 21589
 	- David Carvalhido, nº 16910
+
+###### Swagger.io documentation: [Swagger.io](https://app.swaggerhub.com/apis-docs/projeto4_2021/ValormarIPVC/1.0.0)
 
 ### Users
 ###### Register User
