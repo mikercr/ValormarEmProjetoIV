@@ -149,4 +149,3 @@
 ###### Delete Event Output Lot
 ![](https://raw.githubusercontent.com/mikercr/ValormarEmProjetoIV/Servidor/Images/eventOutputLot/5deleteEventOutputLot.png)
 
-													@2021 - IPVC
